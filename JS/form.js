@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    e.preventDefault()
 // Get references to the form elements
 const nameInput = document.getElementById('name');
 const emailInput = document.getElementById('email');
@@ -353,6 +354,7 @@ function nextButtonChange(){
             
         if(currentStep===0){
             if(validateDetails()){
+                console.log("innnn")
                 steps[currentStep].classList.add('hidden');
                 currentStep++;
                 steps[currentStep].classList.remove('hidden'); 
