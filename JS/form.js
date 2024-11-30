@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', (e) => {
     e.preventDefault()
 // Get references to the form elements
 const nameInput = document.getElementById('name');
