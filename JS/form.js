@@ -91,13 +91,17 @@ let serviceItem = document.querySelectorAll('.list-service');
 // Add event listener to the service item container 
 serviceItem.forEach((item)=>{ 
     item.addEventListener('click', (event) => {
-        if(event.target.type ==='checkbox'){ 
+        // if(event.target.type ==='checkbox'){ 
+            const checkbox = event.target.closest('.price-item')?.querySelector('input[type="checkbox"]');
+
             let checkedItem = event.target.closest('.price-item');
             if(checkedItem.classList.contains('border-gray-300')){
+                checkbox.checked=true
                 checkedItem.classList.remove('border-gray-300','bg-white');
                 checkedItem.classList.add('border-[hsl(213,96%,18%)]', 'bg-[hsl(217,100%,97%)]');
             } 
             else{
+                checkbox.checked=false
                 checkedItem.classList.remove('border-[hsl(213,96%,18%)]', 'bg-[hsl(217,100%,97%)]');
                 checkedItem.classList.add('border-gray-300','bg-white');
             } 
@@ -105,7 +109,7 @@ serviceItem.forEach((item)=>{
             //     name: checkedItem.querySelector('h5').innerText, // Assuming the plan name is in <h5>
             //     price: checkedItem.querySelector('p').innerText  // Assuming the price is in <p>
             // };
-        }
+        // }
         
     }); 
     // console.log()
@@ -206,11 +210,8 @@ function checkPlanSelect(){
 }  
 // select the selection is selected or not and store in local storage 
 function checkSection(){  
-    console.log("entered") 
     let sectionArray=[];
     let selectedPlanJSON = localStorage.getItem('selectedPlan');
-    
-    // Parse the JSON string into a JavaScript object
     let selectedPlan = JSON.parse(selectedPlanJSON);  
     let contents;
     if(selectedPlan["plan"]==='year'){
@@ -230,12 +231,7 @@ function checkSection(){
             sectionArray.push(section);
         }
     }) 
-    if(sectionArray.length){ 
-        localStorage.setItem('selectedSection', JSON.stringify(sectionArray)); 
-        console.log(sectionArray,"section")
-        return true
-    }
-    return false
+    localStorage.setItem('selectedSection', JSON.stringify(sectionArray)); 
 
 }
 // choose year or month in step 3 
@@ -279,17 +275,13 @@ function setSection(){
     planPrice.textContent=selectedPlan['price']
     let [number,period]=selectedPlan['price'].replace('+','').replace('$','').split('/')
     totalCost=parseInt(number);
-    console.log("numberrr",number,period) 
     let sectionCost=0;
     sectionSummary.forEach((section,index)=>{
         let sectionTitle = section.querySelector('.title').textContent; 
         
-        console.log(sectionTitle,selectedSection,"qqqqqqqqqqqqqq")
         let selectedServices = selectedSection.map(section => section.service);
-        // Check if sectionTitle exists and is part of the selectedSection array
         if (selectedServices.includes(sectionTitle)) { 
             let matchedSection = selectedSection.find(item => item.service === sectionTitle);
-            // Hide the section if no title or title is not in selectedSection
             section.classList.remove('hidden');
             let cost=section.querySelector('.cost')
             cost.textContent=matchedSection["cost"] 
@@ -297,19 +289,14 @@ function setSection(){
             let [number1,period1]=matchedSection["cost"].replace('+','').replace('$','').split('/')
             console.log(number1,'matchedSection')
             sectionCost+=Number(number1)
-            // totalCost+=parseInt(number)
-            // totalCost+=parseFloat(matchedSection["cost"].replace('$', '').replace('/mo', ''));
-            
+             
         } else { 
             section.classList.add('hidden');
-            
-            // Otherwise, show the section (in case it was hidden before)
-            // section.style.display = 'block';
+          
         }
     }) 
     let total=document.querySelector('.total-cost')
     total.textContent="+$"+String(totalCost+sectionCost)+"/"+period;
-    // console.log(totalCost,"sssssssssssssss",sectionCost)
 
 
 }
@@ -349,12 +336,10 @@ function nextButtonChange(){
     button.addEventListener('click', (e) => {
         e.preventDefault() 
         let flag=0;
-        console.log(currentStep,'ccccccccccccccccccc')
         if (currentStep < steps.length ) {  
             
         if(currentStep===0){
             if(validateDetails()){
-                console.log("innnn")
                 steps[currentStep].classList.add('hidden');
                 currentStep++;
                 steps[currentStep].classList.remove('hidden'); 
@@ -375,31 +360,16 @@ function nextButtonChange(){
             }
         } 
         else if(currentStep===2){ 
-            console.log("cs",currentStep);
-            if(checkSection()){   
-                steps[currentStep].classList.add('hidden');
-                currentStep++;
-                steps[currentStep].classList.remove('hidden'); 
-                setSection();
-                changeColor('.number-3','.number-4')
-               
-                
-                // let selectedSectionJSON = localStorage.getItem('selectedSection');
-                //  let selectedSection = JSON.parse(selectedSectionJSON); 
-                // console.log( typeof selectedPlan,selectedPlan) 
-                // for(let section of selectedSection){
-                //     console.log("end",section);
-                // }
-            } 
-            else{
-                alert("select any add-ons")
-            }
-        
+            checkSection()
+            steps[currentStep].classList.add('hidden');
+            currentStep++;
+            steps[currentStep].classList.remove('hidden'); 
+            setSection();
+            changeColor('.number-3','.number-4')
         }  
         else if(currentStep===3){ 
            
             if(!steps[1].classList.contains('hidden')){
-                console.log("123456787989090988")
                 changeColor('.number-2','.number-3')
                 steps[currentStep].classList.add('hidden');
                 currentStep=1; 
@@ -420,11 +390,6 @@ function nextButtonChange(){
         }
         else{ 
             console.log("in in last step",steps)
-            // steps[currentStep].classList.add('hidden');
-            // currentStep++;
-            // steps[currentStep].classList.remove('hidden'); 
-            // let step5=document.querySelector('.main-container');
-            // step5.classList.add('md:w-[60%] ')
         } 
         if(flag==0){ 
             let step5=document.querySelector('.main-container');
@@ -441,31 +406,16 @@ function nextButtonChange(){
           if (currentStep > 0) { 
             if(currentStep===3 && (!steps[1].classList.contains('hidden'))){ 
                 currentStep=1;
-                steps[currentStep].classList.add('hidden');
-                let first=parseInt(currentStep)
-                let number1 = `.number-${String(first)}`;
-                let c=parseInt(1)+1;
-                let number2 = `.number-${String(c)}`;
-                changeColor(number2,number1);
-                currentStep--;
-                steps[currentStep].classList.remove('hidden');
+                
             } 
-            else{ 
-                steps[currentStep].classList.add('hidden');
-                let first=parseInt(currentStep)
-                let number1 = `.number-${String(first)}`;
-                let c=parseInt(currentStep)+1;
-                let number2 = `.number-${String(c)}`;
-                console.log(number1,number2,"[[[[[[[[[[[[[[[[")
-                changeColor(number2,number1);
-                currentStep--;
-                console.log(currentStep,"currentsteppppppp");
-                steps[currentStep].classList.remove('hidden');
-
-            }
-           
-            
-      
+            steps[currentStep].classList.add('hidden');
+            let first=parseInt(currentStep)
+            let number1 = `.number-${String(first)}`;
+            let c=parseInt(currentStep)+1;
+            let number2 = `.number-${String(c)}`;
+            changeColor(number2,number1);
+            currentStep--;
+            steps[currentStep].classList.remove('hidden');
           }
         });
       }); 
