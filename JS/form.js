@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', (e) => {
-    e.preventDefault()
-// Get references to the form elements
 const nameInput = document.getElementById('name');
 const emailInput = document.getElementById('email');
 const phoneInput = document.getElementById('phone');
@@ -8,47 +6,36 @@ const nameError = document.querySelector('.name-error');
 const emailError = document.querySelector('.email-error');
 const phoneError = document.querySelector('.phonenum-error');
 
-// Regular expressions for validation
-const nameRegex = /^[A-Za-z\s]+$/; // Only alphabets and spaces
-const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Basic email format
+const nameRegex = /^[A-Za-z\s]+$/; 
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; 
 const phoneRegex = /^\d{10}$/;
-// Monthly and Yearly Prices
+
 const monthlyPrices = { arcade: "$9/mo", advanced: "$12/mo", pro: "$15/mo" };
 const yearlyPrices = { arcade: "$90/yr", advanced: "$120/yr", pro: "$150/yr" };
 
 let toggleClick=document.querySelector('.toggle-click');
 let isMonthly = true;
 toggleClick.addEventListener('click',toggleChange)
-// toggle change 
+
 function toggleChange(){ 
     let priceClass=document.querySelectorAll('.price');  
     let month=document.querySelector('.month');
     let year=document.querySelector('.year');
     const toggleCircle = document.querySelector(".toggle-circle");
-    if(isMonthly){
-        month.classList.add('text-black');
-        month.classList.remove('text-gray-500');
-        year.classList.add('text-gray-500');
-        year.classList.remove('text-black');
-        toggleCircle.classList.add("translate-x-4");
-        toggleCircle.classList.remove("translate-x-0");
-      
-    } 
-    else{
-        month.classList.remove('text-black');
-        month.classList.add('text-gray-500');
-        year.classList.add('text-black');
-        year.classList.remove('text-gray-500');
-        toggleCircle.classList.add("translate-x-0");
-        toggleCircle.classList.remove("translate-x-4");
-      
-    }
+    month.classList.toggle('text-active');
+    month.classList.toggle('text-inactive');
+    year.classList.toggle('text-active');
+    year.classList.toggle('text-inactive');
+
+    // Toggle toggle switch position
+    toggleCircle.classList.toggle("toggle-left");
+    toggleCircle.classList.toggle("toggle-right");
     priceClass.forEach((price)=>{
         let priceName = price.querySelector('h5').textContent.toLowerCase(); // Get the name (arcade, advanced, pro)
         let free=price.querySelector('span');
        
         
-        // Change price text based on the current mode
+        
         let priceText = !isMonthly ? monthlyPrices[priceName] : yearlyPrices[priceName];  
         if(isMonthly){
             free.classList.remove('hidden')
@@ -59,29 +46,38 @@ function toggleChange(){
             free.classList.add('hidden');
         }
         
-        // Update the <p> tag with the new price
+        
         price.querySelector('p').textContent = priceText; 
        
     })
-    isMonthly = !isMonthly;
+    isMonthly = !isMonthly; 
+    let allItems = document.querySelectorAll('.price-item');
+    allItems.forEach((item) => {  
+        if(item.classList.contains('price-item-selected')){
+            item.classList.remove('price-item-selected');
+            item.classList.add('price-item-default');
+        }
+      
+    })
    
 } 
 // select itemprice
 let priceItem=document.querySelector('.list');
 priceItem.addEventListener('click',(event)=>{   
-    console.log("111111111111111")
     let allItems = document.querySelectorAll('.price-item');
-        allItems.forEach((item) => { 
-            item.classList.remove('border-[hsl(213,96%,18%)]', 'bg-[hsl(217,100%,97%)]');
-            item.classList.add('border-gray-300');
+        allItems.forEach((item) => {  
+            if(item.classList.contains('price-item-selected')){
+                item.classList.remove('price-item-selected');
+                item.classList.add('price-item-default');
+            }
         })
     let checkedItem=event.target.closest('.price-item');
-    checkedItem.classList.remove('border-gray-300');
-    checkedItem.classList.add('border-[hsl(213,96%,18%)]', 'bg-[hsl(217,100%,97%)]');
+    checkedItem.classList.remove('price-item-default');
+    checkedItem.classList.add('price-item-selected');
+    
    
 
 }); 
-// /// Select service items container
 
 
 
@@ -91,30 +87,22 @@ let serviceItem = document.querySelectorAll('.list-service');
 // Add event listener to the service item container 
 serviceItem.forEach((item)=>{ 
     item.addEventListener('click', (event) => {
-        // if(event.target.type ==='checkbox'){ 
-            const checkbox = event.target.closest('.price-item')?.querySelector('input[type="checkbox"]');
+        const checkbox = event.target.closest('.price-item')?.querySelector('input[type="checkbox"]');
 
-            let checkedItem = event.target.closest('.price-item');
-            if(checkedItem.classList.contains('border-gray-300')){
-                checkbox.checked=true
-                checkedItem.classList.remove('border-gray-300','bg-white');
-                checkedItem.classList.add('border-[hsl(213,96%,18%)]', 'bg-[hsl(217,100%,97%)]');
-            } 
-            else{
-                checkbox.checked=false
-                checkedItem.classList.remove('border-[hsl(213,96%,18%)]', 'bg-[hsl(217,100%,97%)]');
-                checkedItem.classList.add('border-gray-300','bg-white');
-            } 
-            // const sectionData = {
-            //     name: checkedItem.querySelector('h5').innerText, // Assuming the plan name is in <h5>
-            //     price: checkedItem.querySelector('p').innerText  // Assuming the price is in <p>
-            // };
-        // }
-        
+        let checkedItem = event.target.closest('.price-item');
+        if(checkedItem.classList.contains('price-item-default')){
+            checkbox.checked=true
+            checkedItem.classList.remove('price-item-default');
+            checkedItem.classList.add('price-item-selected');
+            
+        } 
+        else{
+            checkbox.checked=false
+            checkedItem.classList.remove('price-item-selected');
+            checkedItem.classList.add('price-item-default');
+            
+        }  
     }); 
-    // console.log()
-    
-
 })
 
 
@@ -122,11 +110,16 @@ serviceItem.forEach((item)=>{
 function validateName() {
     if (nameRegex.test(nameInput.value)) {
         nameError.classList.add('hidden');
-        nameInput.classList.remove('border-red-500');
+        nameInput.classList.remove('error');
+        nameInput.classList.add('no-error');
+
+
         return true;
     } else {
         nameError.classList.remove('hidden');
-        nameInput.classList.add('border-red-500');
+        nameInput.classList.remove('no-error');
+        nameInput.classList.add('error');
+        
         return false;
     }
 }
@@ -135,11 +128,13 @@ function validateName() {
 function validateEmail() {
     if (emailRegex.test(emailInput.value)) {
         emailError.classList.add('hidden');
-        emailInput.classList.remove('border-red-500');
+        emailInput.classList.remove('error');
+        emailInput.classList.add('no-error');
         return true;
     } else {
         emailError.classList.remove('hidden');
-        emailInput.classList.add('border-red-500');
+        emailInput.classList.remove('no-error');
+        emailInput.classList.add('error');
         return false;
     }
 }
@@ -148,11 +143,13 @@ function validateEmail() {
 function validatePhone() {
     if (phoneRegex.test(phoneInput.value)) {
         phoneError.classList.add('hidden');
-        phoneInput.classList.remove('border-red-500');
+        phoneInput.classList.remove('error');
+        phoneInput.classList.add('no-error');
         return true;
     } else {
         phoneError.classList.remove('hidden');
-        phoneInput.classList.add('border-red-500');
+        phoneInput.classList.remove('no-error');
+        phoneInput.classList.add('error');
         return false;
     }
 }
@@ -167,11 +164,14 @@ const nextButton = document.querySelector('.nextButton');
 const validateField = (input, regex, errorElement) => {
     if (!regex.test(input.value.trim())) {
         errorElement.classList.remove('hidden');
-        input.classList.add('border-red-500');
+        input.classList.remove('no-error');
+        input.classList.add('error');
         return false;
     } else {
         errorElement.classList.add('hidden');
-        input.classList.remove('border-red-500');
+        input.classList.remove('error');
+        input.classList.add('no-error');
+
         return true;
     }
 }; 
@@ -190,14 +190,14 @@ function checkPlanSelect(){
     let planItems=document.querySelectorAll('.price-item')
     let spanDuration='month'; 
     let validity=document.querySelector('.toggle-circle');
-    if(validity.classList.contains('translate-x-4')){
+    if(validity.classList.contains('toggle-right')){
         spanDuration='year'
     }
     for(let item of planItems){
-        if(item.classList.contains('bg-[hsl(217,100%,97%)]'))
+        if(item.classList.contains('price-item-selected'))
         { 
-            let planTitle = item.querySelector('h5').textContent; // Title (e.g., "arcade")
-            let planPrice = item.querySelector('p').textContent; // Price (e.g., "$9/mo")
+            let planTitle = item.querySelector('h5').textContent; 
+            let planPrice = item.querySelector('p').textContent; 
             
             // Store the selected plan in localStorage
             localStorage.setItem('selectedPlan', JSON.stringify({ title: planTitle, price: planPrice, plan:spanDuration}));
@@ -236,32 +236,27 @@ function checkSection(){
 }
 // choose year or month in step 3 
 function setPlan(){ 
-    // console.log("inside setplan")
     let selectedPlanJSON = localStorage.getItem('selectedPlan');
-    // console.log(selectedPlanJSON, "selectedPlannnn");
     
-    // Parse the JSON string into a JavaScript object
     let selectedPlan = JSON.parse(selectedPlanJSON);
     let year =document.querySelector('.price-year');
     let month = document.querySelector('.price-month');
-    // console.log(selectedPlan,"selectedPlannnn")
     if(selectedPlan["plan"]=='year'){
         year.classList.remove('hidden')
         month.classList.add('hidden');
     } 
-    else{  
+    else{   
         console.log("in ",selectedPlan["plan"])
         month.classList.remove('hidden');
         year.classList.add('hidden')
 
-    }
+    } 
 } 
 // setp -4 set all the values stored in local storage display 
 function setSection(){ 
     let totalCost=0;
     let summary=document.querySelector('.price-summary');
     let sectionSummary=document.querySelectorAll('.section-summary');
-    // console.log(summary,"summary")
     
     let planTitle=document.querySelector('.summary-plan');
     let selectedPlanJSON=localStorage.getItem('selectedPlan')
@@ -306,7 +301,6 @@ changePlan.addEventListener('click',(event)=>{
     step2.classList.remove('hidden');
     let step4=document.querySelector('.step-4');
     step4.classList.add('hidden')
-    // nextButtonChange();
     changeColor('.number-4','.number-2');
 
 }) 
@@ -316,18 +310,17 @@ function changeColor(number1,number2){
     let next=document.querySelector(number2); 
     console.log(current,next)
 
-    current.classList.remove('bg-[hsl(206,94%,87%)]','text-[#4f46e5]');
-    current.classList.add('text-white');
-    next.classList.remove('text-white');
-    next.classList.add('bg-[hsl(206,94%,87%)]','text-[#4f46e5]'); 
+    current.classList.remove('number-active');
+    current.classList.add('number-inactive');
+    next.classList.remove('number-inactive');
+    next.classList.add('number-active'); 
    
    
 } 
 
 const nextButtons = document.querySelectorAll('.nextButton');
 const prevButtons = document.querySelectorAll('.goBack');
-const steps = document.querySelectorAll('.step-1, .step-2, .step-3, .step-4, .step-5'); // Add more steps as needed
-// let currentStep = 0;
+const steps = document.querySelectorAll('.step-1, .step-2, .step-3, .step-4, .step-5'); 
 nextButtonChange();
 function nextButtonChange(){
     let currentStep = 0;
@@ -373,9 +366,15 @@ function nextButtonChange(){
                 changeColor('.number-2','.number-3')
                 steps[currentStep].classList.add('hidden');
                 currentStep=1; 
-                steps[currentStep].classList.add('hidden');
-                currentStep++;
-                steps[currentStep].classList.remove('hidden'); 
+                if(checkPlanSelect()){
+                    steps[currentStep].classList.add('hidden');
+                    currentStep++;
+                    steps[currentStep].classList.remove('hidden'); 
+                } 
+                else{
+                    alert('select any plan')
+                }
+               
             } 
             else{ 
                 flag=1;

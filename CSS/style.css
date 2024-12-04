@@ -1,0 +1,39 @@
+.text-active {
+    color: black;
+}
+
+.text-inactive {
+    color: gray;
+} 
+.number-active{
+    background-color: hsl(206, 94%, 87%);
+    color: #4f46e5;
+
+} 
+.number-inactive{
+    color: white;
+
+}
+
+.toggle-left {
+    transform: translateX(0);
+}
+
+.toggle-right {
+    transform: translateX(1rem);
+
+} 
+.price-item-default {
+    border-color: gray;
+}
+
+.price-item-selected {
+    border-color:hsl(240, 85%, 39%);
+    background-color: hsl(217, 100%, 97%);
+}
+.error{
+    border-color: red;
+} 
+.no-error{
+    border-color: gray;
+}

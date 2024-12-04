@@ -7,6 +7,7 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./CSS/style.css">
 
   
 </head> 
@@ -29,7 +30,7 @@
                 <ul class="list-none absolute top-[6vw] left-[25vw] space-x-[6vw]
                 flex flex-row md:top-10 md:left-10  md:flex-col md:items-start md:space-x-0 md:space-y-6 ">
                     <li class="flex  items-center md:flex-row ">
-                        <div class="number-1 bg-[hsl(206,94%,87%)] border border-white text-[#4f46e5] text-sm  rounded-full flex justify-center items-center  w-8 h-8 font-bold  md:mr-2">
+                        <div class="number-1 number-active border border-white  text-sm  rounded-full flex justify-center items-center  w-8 h-8 font-bold  md:mr-2">
                             1
                         </div>  
                         <div class="flex flex-col hidden md:block "> 
@@ -38,7 +39,7 @@
                         </div>
                     </li>
                     <li class="flex items-center md:flex-row">
-                        <div class="number-2 border border-white text-white text-sm rounded-full flex justify-center items-center  w-8 h-8 font-bold md:mr-2">
+                        <div class="number-2 number-inactive border border-white  text-sm rounded-full flex justify-center items-center  w-8 h-8 font-bold md:mr-2">
                             2
                         </div>
                         <div class="flex flex-col hidden md:block"> 
@@ -47,7 +48,7 @@
                         </div>
                     </li>
                     <li class="flex items-center md:flex-row">
-                        <div class="number-3 border border-white text-white text-sm rounded-full flex justify-center items-center  w-8 h-8 font-bold md:mr-2">
+                        <div class="number-3 number-inactive border border-white  text-sm rounded-full flex justify-center items-center  w-8 h-8 font-bold md:mr-2">
                             3
                         </div>
                         <div class="flex flex-col hidden md:block"> 
@@ -56,7 +57,7 @@
                         </div>
                     </li>
                     <li class="flex items-center md:flex-row">
-                        <div class="number-4 border border-white text-white text-sm  rounded-full flex justify-center items-center w-8 h-8 font-bold md:mr-2">
+                        <div class="number-4 number-inactive border border-white  text-sm  rounded-full flex justify-center items-center w-8 h-8 font-bold md:mr-2">
                             4
                         </div>
                         <div class="flex flex-col hidden md:block"> 
@@ -69,7 +70,7 @@
             <!-- Right Section (Details) -->
             <div class="flex justify-center items-center flex-col h-full bg-[hsl(217,100%,97%)] md:justify-start md:bg-white  md:m-4 md:p-4 md:pb-0 md:mb-0">
                 <!-- <div class="flex justify-center items-center flex-col h-full bg-[hsl(217,100%,97%)] md:justify-start md:bg-white md:text-center"> -->
-              <div class="right-content  step-1  absolute top-[115px] p-6 h-auto bg-white z-10 rounded-lg md:relative md:top-0 md:z-10  md:pb-0 md:mb-0">
+              <div class="right-content step-1  absolute top-[115px] p-6 h-auto bg-white z-10 rounded-lg md:relative md:top-0 md:z-10  md:pb-0 md:mb-0">
                 <form>
                 <h1 class="text-2xl font-semibold text-[hsl(213,96%,18%)]  mb-2" >Personal Info</h1>
                 <p class="mb-6 text-lg text-gray-400 md:text-sm">Please provide your name, email address, and phone number.</p>
@@ -79,20 +80,20 @@
                             Name
                             <span class="name-error text-red-500 text-xs ml-auto hidden">This field is required</span>
                           </label>
-                          <input type="text" class="name p-2 border border-gray-300 w-full rounded-md placeholder:text-sm focus:outline-none focus:border-black focus:border-2" id="name" placeholder="e.g. Stephen King">
+                          <input type="text" class="name no-error p-2 border  w-full rounded-md placeholder:text-sm focus:outline-none focus:border-black focus:border-2" id="name" placeholder="e.g. Stephen King">
                           
                     </div>
                     <div class="mb-4">
                       <label for="email" class=" block text-lg font-normal text-xs text-gray-700 mb-1 flex items-center justify-between">Email Address<span class="email-error text-red-500 text-xs  ml-auto hidden">This field is required</span></label>
-                      <input type="email" class=" email w-full p-2 border border-gray-300 rounded-md placeholder:text-sm focus:outline-none focus:border-black focus:border-2" id="email" placeholder="e.g.stephenking@lorem.com">
+                      <input type="email" class=" email no-error w-full p-2 border  rounded-md placeholder:text-sm focus:outline-none focus:border-black focus:border-2" id="email" placeholder="e.g.stephenking@lorem.com">
                     </div>
                     <div class="mb-4">
                       <label for="phone" class="block text-lg font-normal text-xs text-gray-700 mb-1 flex items-center justify-between ">Phone Number<span class="phonenum-error text-red-500 text-xs  ml-auto  hidden">This field is required</span></label>
                      
-                      <input type="tel" class="phone p-2 w-full border border-gray-300 rounded-md placeholder:text-sm focus:outline-none focus:border-black focus:border-2" id="phone" placeholder="e.g. +1 234 567 890">
+                      <input type="tel" class="phone no-error p-2 w-full border  rounded-md placeholder:text-sm focus:outline-none focus:border-black focus:border-2" id="phone" placeholder="e.g. +1 234 567 890">
                       
                     </div>  
-                    <div class="fixed bottom-0 right-0 flex justify-end w-full md:relative   bg-white md:mt-24">
+                    <div class="fixed bottom-0 right-0 flex justify-end w-full md:relative   bg-white md:mt-40">
                         <button type="submit" class="nextButton bg-[hsl(213,96%,18%)] text-white p-3 pl-6 pr-6 m-4 rounded  md:m-0">Next Step</button>
                          </div> 
                   </form> 
@@ -103,7 +104,8 @@
                 <h1 class="text-2xl font-semibold text-[hsl(213,96%,18%)] mb-2 " >Select your plan</h1>
                 <p class="mb-6 text-lg text-gray-400 md:text-sm">You have the option of monthly  or yearly billing</p> 
                 <div class="flex flex-col list md:flex-row md:justify-between w-auto md:w-full"> 
-                    <div class="price-item flex items-start justify-start flex-row mb-4 border border-gray-300 rounded-lg p-4 md:flex-col md:p-2  md:mr-4 md:w-1/3 md:pr-10">
+                    <div class="price-item flex items-start justify-start flex-row mb-4 border border-gray-300 rounded-lg p-4 md:flex-col md:p-2  md:mr-4 md:w-1/3 md:pr-10
+                    hover:border-[hsl(240,85%,39%)] hover:bg-[hsl(217,100%,97%)] hover:text-white transition-all duration-200 price-item-default">
                         <img src="./assets/images/icon-arcade.svg">
                         <div class="price flex flex-col ml-2 md:mt-6 md:ml-0" >
                             <h5 class="text-[hsl(213,96%,18%)] text-lg ">Arcade</h5>
@@ -111,7 +113,8 @@
                             <span class="text-[hsl(213,96%,18%)] hidden">2 months free</span>
                         </div>
                     </div>
-                    <div class="price-item  flex items-start justify-start flex-row mb-4 border border-gray-300 rounded-lg p-4 md:flex-col md:p-2  md:mr-4 md:w-1/3 md:pr-10">
+                    <div class="price-item  flex items-start justify-start flex-row mb-4 border border-gray-300 rounded-lg p-4 md:flex-col md:p-2  md:mr-4 md:w-1/3 md:pr-10
+                    hover:border-[hsl(240,85%,39%)] hover:bg-[hsl(217,100%,97%)] hover:text-white transition-all duration-200 price-item-default">
                         <img src="./assets/images/icon-advanced.svg" >
                         <div class="price flex flex-col ml-2 md:mt-6 md:ml-0">
                             <h5 class="text-[hsl(213,96%,18%)] text-lg">Advanced</h5>
@@ -120,7 +123,8 @@
                         </div>
                     </div> 
                        
-                    <div class="price-item  flex items-start justify-start flex-row mb-4 border border-gray-300 rounded-lg p-4 md:flex-col md:p-2 md:w-1/3 md:pr-10">
+                    <div class="price-item  flex items-start justify-start flex-row mb-4 border border-gray-300 rounded-lg p-4 md:flex-col md:p-2 md:w-1/3 md:pr-10
+                    hover:border-[hsl(240,85%,39%)] hover:bg-[hsl(217,100%,97%)] hover:text-white transition-all duration-200 price-item-default">
                         <img src="./assets/images/icon-pro.svg" > 
                         <div class="price flex flex-col ml-2 md:mt-6 md:ml-0">
                             <h5 class="text-[hsl(213,96%,18%)] text-lg">Pro</h5>
@@ -130,18 +134,18 @@
                     </div> 
                 </div>
                     <div class="flex flex-row p-4 bg-[hsl(217,100%,97%)] rounded-lg justify-center">
-                        <span class="mr-6 month text-gray-500">Monthly</span>
+                        <span class="mr-6 month text-inactive">Monthly</span>
                         <div class=" toggle-click relative mr-6 w-10 h-6 bg-[hsl(213,96%,18%)] rounded-full p-2 ">
-                            <div class=" toggle-click toggle-circle absolute top-1 left-1 w-4 h-4 bg-white rounded-full"
+                            <div class=" toggle-click toggle-circle absolute top-1 left-1 w-4 h-4 bg-white rounded-full "
                             >
 
                             </div>
                         </div>
                         <span class="year">Yearly</span>
                     </div> 
-                     <div class="fixed bottom-0 right-0 flex justify-between w-full md:relative   bg-white md:mt-32 ">
+                     <div class="fixed bottom-0 right-0 flex justify-between w-full md:relative   bg-white md:mt-40 ">
                     <button type="submit" class="goBack  text-gray-400 py-2 px-4 rounded float-left md:p-0 ">Go Back</button>
-                    <button type="submit" class="nextButton next-2 bg-[hsl(213,96%,18%)] text-white p-3 pl-6 pr-6 m-4 rounded-lg md:mr-0 ">Next Step</button>
+                    <button type="submit" class="nextButton next-2 bg-[hsl(213,96%,18%)] text-white p-3 pl-6 pr-6 m-4 rounded-lg md:mr-0 md:ml-24">Next Step</button>
                      </div> 
                 </form>
                 </div>
@@ -151,7 +155,8 @@
                     <h1 class="text-2xl font-semibold text-[hsl(213,96%,18%)] mb-2 " >Pick add-ons</h1>
                     <p class="mb-6 text-lg text-gray-400 md:text-sm">Add-ons help enhance your gaming experience.</p> 
                     <div class="flex flex-col price-month list-service md:justify-between w-auto"> 
-                        <div class="price-item  flex justify-between mb-4 border border-gray-300 rounded-lg p-4  md:gap-14 ">
+                        <div class="price-item  flex justify-between mb-4 border border-gray-300 rounded-lg p-4  md:gap-14
+                        hover:border-[hsl(240,85%,39%)] hover:bg-[hsl(217,100%,97%)] hover:text-white transition-all duration-200 price-item-default">
                             <div class="flex flex-row">
                                 <input type="checkbox" class="box w-5 h-5 rounded-lg self-center"/> 
                                 <div class="flex flex-col ml-4"> 
@@ -161,7 +166,8 @@
                             </div>
                             <div class="cost text-blue-800">+$1/mo</div>    
                         </div> 
-                        <div class="price-item  flex justify-between mb-4 border border-gray-300 rounded-lg p-4  md:gap-14">
+                        <div class="price-item  flex justify-between mb-4 border border-gray-300 rounded-lg p-4  md:gap-14
+                        hover:border-[hsl(240,85%,39%)] hover:bg-[hsl(217,100%,97%)] hover:text-white transition-all duration-200 price-item-default">
                             <div class="flex flex-row">
                                 <input type="checkbox" class="box w-5 h-5 rounded-lg self-center"/> 
                                 <div class="flex flex-col ml-4"> 
@@ -171,7 +177,8 @@
                             </div>
                             <div class="cost text-blue-800">+$2/mo</div>
                         </div> 
-                        <div class="price-item  flex justify-between mb-4 border border-gray-300 rounded-lg p-4  md:gap-14">
+                        <div class="price-item  flex justify-between mb-4 border border-gray-300 rounded-lg p-4  md:gap-14
+                        hover:border-[hsl(240,85%,39%)] hover:bg-[hsl(217,100%,97%)] hover:text-white transition-all duration-200 price-item-default">
                             <div class="flex flex-row">
                                 <input type="checkbox" class="box w-5 h-5 rounded-lg self-center"/> 
                                 <div class="flex flex-col ml-4"> 
@@ -183,7 +190,8 @@
                         </div>
                     </div>  
                     <div class="flex flex-col hidden price-year list-service  w-auto "> 
-                        <div class="price-item  flex justify-between mb-4 border border-gray-300 rounded-lg p-4  md:gap-14">
+                        <div class="price-item  flex justify-between mb-4 border border-gray-300 rounded-lg p-4  md:gap-14
+                        hover:border-[hsl(240,85%,39%)] hover:bg-[hsl(217,100%,97%)] hover:text-white transition-all duration-200 price-item-default">
                             <div class="flex flex-row">
                                 <input type="checkbox" class="w-5 h-5 rounded-lg self-center"/> 
                                 <div class="flex flex-col ml-4"> 
@@ -193,7 +201,8 @@
                             </div>
                             <div class="cost text-blue-800 md:self-center">+$10/yr</div>
                         </div> 
-                        <div class="price-item flex justify-between flex-row mb-4 border border-gray-300 rounded-lg p-4 md:gap-14">
+                        <div class="price-item flex justify-between flex-row mb-4 border border-gray-300 rounded-lg p-4 md:gap-14
+                        hover:border-[hsl(240,85%,39%)] hover:bg-[hsl(217,100%,97%)] hover:text-white transition-all duration-200 price-item-default">
                             <div class="flex flex-row">
                                 <input type="checkbox" class="w-5 h-5 rounded-lg self-center"/> 
                                 <div class="flex flex-col ml-4"> 
@@ -203,7 +212,8 @@
                             </div>
                             <div class="cost text-blue-800 md:self-center">+$20/yr</div>
                         </div> 
-                        <div class="price-item flex justify-between flex-row mb-4 border border-gray-300 rounded-lg p-4 md:gap-14">
+                        <div class="price-item flex justify-between flex-row mb-4 border border-gray-300 rounded-lg p-4 md:gap-14
+                        hover:border-[hsl(240,85%,39%)] hover:bg-[hsl(217,100%,97%)] hover:text-white transition-all duration-200 price-item-default">
                             <div class="flex flex-row">
                                 <input type="checkbox" class="w-5 h-5 rounded-lg self-center"/> 
                                 <div class="flex flex-col ml-4"> 
@@ -253,7 +263,7 @@
                         <div class="text-gray-400">Total (per month)</div>
                         <div class="total-cost text-blue-800 font-bold">+$12/mo</div>
                     </div> 
-                    <div class="fixed bottom-0 right-0 flex justify-between w-full md:relative   bg-white md:mt-32 ">
+                    <div class="fixed bottom-0 right-0 flex justify-between w-full md:relative   bg-white md:mt-40 ">
                         <button type="submit" class="goBack  text-gray-400 py-2 px-4 rounded float-left md:p-0 ">Go Back</button>
                         <button type="submit" class="nextButton next-3 
                         bg-[hsl(243,100%,62%)] text-white p-3 pl-6 pr-6 m-4 rounded-lg md:mr-0 ">Confirm</button>
